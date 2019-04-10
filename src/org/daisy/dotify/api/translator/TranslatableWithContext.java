@@ -1,6 +1,7 @@
 package org.daisy.dotify.api.translator;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * <p>Provides a specification for a list of texts to translate.
@@ -24,8 +25,8 @@ import java.util.List;
  */
 public class TranslatableWithContext {
 	private final TextWithContext texts;
-	private final AttributeWithContext attributes;
-	private final String locale;
+	private final Optional<AttributeWithContext> attributes;
+	private final Optional<String> locale;
 	private final boolean hyphenate;
 	private final boolean markCapitalLetters;
 	
@@ -98,8 +99,8 @@ public class TranslatableWithContext {
 
 	private TranslatableWithContext(Builder builder) {
 		this.texts = builder.texts;
-		this.locale = builder.locale;
-		this.attributes = builder.attributes;
+		this.locale = Optional.ofNullable(builder.locale);
+		this.attributes = Optional.ofNullable(builder.attributes);
 		this.hyphenate = builder.hyphenate;
 		this.markCapitalLetters = builder.markCapitalLetters;
 	}
@@ -254,7 +255,7 @@ public class TranslatableWithContext {
 	 * Gets the locale for the text to translate.
 	 * @return the locale
 	 */
-	public String getLocale() {
+	public Optional<String> getLocale() {
 		return locale;
 	}
 
@@ -263,7 +264,7 @@ public class TranslatableWithContext {
 	 * 
 	 * @return the attribute context
 	 */
-	public AttributeWithContext getAttributes() {
+	public Optional<AttributeWithContext> getAttributes() {
 		return attributes;
 	}
 
